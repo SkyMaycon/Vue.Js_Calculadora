@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculadora</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <label for="num1">Número 1:</label>
+      <input type="number" id="num1" v-model="num1" @input="calculate"><br><br>
+      <label for="num2">Número 2:</label>
+      <input type="number" id="num2" v-model="num2" @input="calculate"><br><br>
+      <label for="operacao">Operação:</label>
+      <select id="operacao" v-model="operacao" @change="calculate">
+        <option value="soma">+</option>
+        <option value="subtracao">-</option>
+        <option value="multiplicacao">*</option>
+        <option value="divisao">/</option>
+      </select><br><br>
+      <label for="resultado">Resultado:</label>
+      <input type="number" id="resultado" :value="resultado" disabled>
+    </div>
+    
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            num1: 0,
+            num2: 0,
+            operacao: "soma",
+          };
+        },
+        computed: {
+          resultado() {
+            switch (this.operacao) {
+              case "soma":
+                return this.num1 + this.num2;
+              case "subtracao":
+                return this.num1 - this.num2;
+              case "multiplicacao":
+                return this.num1 * this.num2;
+              case "divisao":
+                return this.num1 / this.num2;
+            }
+          }
+        },
+        methods: {
+          calculate() {
+            // O cálculo será atualizado automaticamente devido ao uso do computed property
+          }
+        }
+      });
+      
+      app.mount("#app");
+    </script>
+  </body>
+</html>
